@@ -19,7 +19,8 @@ public class ProductController {
     @PutMapping("/{id}") public Product update(@PathVariable Long id, @RequestBody Product input) {
         Product product = products.findById(id).orElseThrow();
         product.setName(input.getName()); product.setDescription(input.getDescription()); product.setPrice(input.getPrice());
-        product.setStock(input.getStock()); product.setCategory(input.getCategory());
+        product.setStockQuantity(input.getStockQuantity()); product.setCategory(input.getCategory());
+        product.setSupplier(input.getSupplier());
         return products.save(product);
     }
     @DeleteMapping("/{id}") @ResponseStatus(HttpStatus.NO_CONTENT) public void delete(@PathVariable Long id) { products.deleteById(id); }
