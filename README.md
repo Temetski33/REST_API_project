@@ -51,7 +51,7 @@ Content-Type: application/json
 
 ## Tietokantaratkaisu
 
-Tietokannan nykyiset taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`.
+Tietokannan taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`.
 
 
 
