@@ -33,6 +33,14 @@ Kaikki vastaukset ovat JSON-muotoisia.
 | GET/PUT/DELETE | `/api/categories/{id}` | Kategorian CRUD-operaatiot |
 | GET/POST | `/api/customers` | Listaa tai luo asiakkaan |
 | GET/PUT/DELETE | `/api/customers/{id}` | Asiakkaan CRUD-operaatiot |
+| GET/POST | `/api/customer-addresses` | Listaa tai luo asiakkaan osoitteen |
+| GET/PUT/DELETE | `/api/customer-addresses/{id}` | Asiakasosoitteen CRUD-operaatiot |
+| GET/POST | `/api/supplier-addresses` | Listaa tai luo toimittajan osoitteen |
+| GET/PUT/DELETE | `/api/supplier-addresses/{id}` | Toimittajaosoitteen CRUD-operaatiot |
+| GET/POST | `/api/contacts` | Listaa tai luo yhteystiedon |
+| GET/PUT/DELETE | `/api/contacts/{id}` | Yhteystiedon CRUD-operaatiot |
+
+Osoitteita voi suodattaa omistajan perusteella: `/api/customer-addresses?customerId=1` ja `/api/supplier-addresses?supplierId=1`. Yhteystietoja voi hakea sähköpostilla: `/api/contacts?email=example@example.com`.
 
 Esimerkki:
 
@@ -44,14 +52,15 @@ Content-Type: application/json
   "name": "Mekaaninen näppäimistö",
   "description": "USB-C-liitäntä",
   "price": 89.90,
-  "stock": 12,
-  "category": { "id": 1 }
+  "stockQuantity": 12,
+  "category": { "id": 1 },
+  "supplier": { "id": 1 }
 }
 ```
 
 ## Tietokantaratkaisu
 
-Tietokannan taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`.
+Tietokannan taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`. Java-entiteetit kattavat tällä hetkellä kaikki muut taulut paitsi `orders` ja `orderitems`.
 
 
 
