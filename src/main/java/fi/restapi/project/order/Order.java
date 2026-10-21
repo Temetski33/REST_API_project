@@ -1,6 +1,6 @@
 package fi.restapi.project.order;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fi.restapi.project.customer.Customer;
 import fi.restapi.project.customer.CustomerAddress;
 import jakarta.persistence.*;
@@ -26,7 +26,7 @@ public class Order {
     private CustomerAddress shippingAddress;
     private String status;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonIgnore
     private List<OrderItem> items = new ArrayList<>();
 
     @PrePersist

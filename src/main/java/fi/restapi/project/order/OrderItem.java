@@ -1,6 +1,6 @@
 package fi.restapi.project.order;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fi.restapi.project.product.Product;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ public class OrderItem {
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id")
-    @JsonBackReference
+    @JsonIgnore
     private Order order;
     @Id
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
