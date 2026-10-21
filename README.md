@@ -1,6 +1,6 @@
 # REST API Project
 
-Spring Boot -pohjainen REST API pienen verkkokaupan tilausten hallintaan. API käyttää olemassa olevaa MariaDB-tietokantaa `db_project_2026`.
+Spring Boot -pohjainen REST API pienen verkkokaupan tilausten hallintaan. API käyttää olemassa olevaa MariaDB-tietokantaa `db_project_2026`. Tietokanta on kurssilla projektiin annettu tietokanta dummy-datan kanssa.
 
 ## Käynnistys
 
