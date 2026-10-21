@@ -8,8 +8,8 @@ Vaatimukset: Java 21, Maven 3.9+ ja MariaDB.
 
 ```powershell
 $env:DB_URL = "jdbc:mariadb://localhost:3306/db_project_2026"
-$env:DB_USERNAME = "root"
-$env:DB_PASSWORD = "salasana"
+$env:DB_USERNAME = "rest_api_app"
+$env:DB_PASSWORD = "oma-salasana"
 mvn spring-boot:run
 ```
 
