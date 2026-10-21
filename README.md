@@ -39,8 +39,28 @@ Kaikki vastaukset ovat JSON-muotoisia.
 | GET/PUT/DELETE | `/api/supplier-addresses/{id}` | Toimittajaosoitteen CRUD-operaatiot |
 | GET/POST | `/api/contacts` | Listaa tai luo yhteystiedon |
 | GET/PUT/DELETE | `/api/contacts/{id}` | Yhteystiedon CRUD-operaatiot |
+| GET | `/api/orders` | Listaa tilaukset |
+| GET | `/api/orders?customerId=1` | Listaa asiakkaan tilaukset |
+| GET | `/api/orders/{id}` | Hakee tilauksen riveineen |
+| POST | `/api/orders` | Luo uuden tilauksen ja sen tilausrivit |
 
 Osoitteita voi suodattaa omistajan perusteella: `/api/customer-addresses?customerId=1` ja `/api/supplier-addresses?supplierId=1`. Yhteystietoja voi hakea sähköpostilla: `/api/contacts?email=example@example.com`.
+
+Tilauksen luonti on transaktionaalinen: tilaus ja kaikki sen rivit tallennetaan samalla kertaa. Tuotteen hinta kopioidaan tilausriville `unit_price`-kenttään tilaushetkellä.
+
+```json
+POST /api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "shippingAddressId": 1,
+  "items": [
+    { "productId": 10, "quantity": 2 },
+    { "productId": 11, "quantity": 1 }
+  ]
+}
+```
 
 Esimerkki:
 
@@ -60,7 +80,7 @@ Content-Type: application/json
 
 ## Tietokantaratkaisu
 
-Tietokannan taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`. Java-entiteetit kattavat tällä hetkellä kaikki muut taulut paitsi `orders` ja `orderitems`.
+Tietokannan taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`. Java-entiteetit kattavat nyt kaikki taulut. `orders` ja `orderitems` tallennetaan palvelussa yhtenä transaktiona.
 
 
 
