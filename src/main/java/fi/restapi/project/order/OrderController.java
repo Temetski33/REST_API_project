@@ -22,7 +22,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public Order one(@PathVariable Long id) {
-        return orders.findById(id).orElseThrow();
+        return orderService.findById(id).orElseThrow();
     }
 
     @PostMapping

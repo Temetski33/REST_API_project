@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -51,9 +52,19 @@ public class OrderService {
         return orders.save(order);
     }
 
+    @Transactional(readOnly = true)
     public List<Order> findAll(Long customerId) {
-        return customerId == null
+        List<Order> result = customerId == null
                 ? orders.findTop50ByOrderByOrderDateDesc()
                 : orders.findTop50ByCustomerIdOrderByOrderDateDesc(customerId);
+        result.forEach(order -> order.getItems().size());
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Order> findById(Long id) {
+        Optional<Order> result = orders.findById(id);
+        result.ifPresent(order -> order.getItems().size());
+        return result;
     }
 }
