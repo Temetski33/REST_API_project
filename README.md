@@ -43,6 +43,7 @@ Kaikki vastaukset ovat JSON-muotoisia.
 | GET | `/api/orders?customerId=1` | Listaa asiakkaan 50 uusinta tilausta |
 | GET | `/api/orders/{id}` | Hakee tilauksen riveineen |
 | POST | `/api/orders` | Luo uuden tilauksen ja sen tilausrivit |
+| GET | `/api/order-summary` | Palauttaa näkymän 50 uusinta tilausyhteenvetoa |
 
 Osoitteita voi suodattaa omistajan perusteella: `/api/customer-addresses?customerId=1` ja `/api/supplier-addresses?supplierId=1`. Yhteystietoja voi hakea sähköpostilla: `/api/contacts?email=example@example.com`.
 
@@ -81,6 +82,25 @@ Content-Type: application/json
 ## Tietokantaratkaisu
 
 Tietokannan taulut ovat `customers`, `customeraddresses`, `contacts`, `orders`, `orderitems`, `products`, `productcategories`, `suppliers` ja `supplieraddresses`. Java-entiteetit kattavat nyt kaikki taulut. `orders` ja `orderitems` tallennetaan palvelussa yhtenä transaktiona.
+
+### Näkymä
+
+Projektissa on yksi raportointinäkymä: `order_summary`. Se yhdistää tilauksen ja asiakkaan tiedot sekä laskee tilauksen rivimäärän. Näkymän SQL löytyy tiedostosta `database/order_summary_view.sql`.
+
+Luo näkymä kerran MariaDB:ssä ylläpitäjänä:
+
+```sql
+SOURCE database/order_summary_view.sql;
+```
+
+Jos sovelluskäyttäjällä ei ole vielä näkymän lukuoikeutta, anna oikeus ylläpitäjänä:
+
+```sql
+GRANT SELECT ON db_project_2026.order_summary TO 'rest_api_app'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+Sovellus lukee näkymää endpointilla `/api/order-summary`. Endpoint palauttaa enintään 50 uusinta yhteenvetoa.
 
 
 
