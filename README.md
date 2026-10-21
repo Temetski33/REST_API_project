@@ -39,8 +39,8 @@ Kaikki vastaukset ovat JSON-muotoisia.
 | GET/PUT/DELETE | `/api/supplier-addresses/{id}` | Toimittajaosoitteen CRUD-operaatiot |
 | GET/POST | `/api/contacts` | Listaa tai luo yhteystiedon |
 | GET/PUT/DELETE | `/api/contacts/{id}` | Yhteystiedon CRUD-operaatiot |
-| GET | `/api/orders` | Listaa tilaukset |
-| GET | `/api/orders?customerId=1` | Listaa asiakkaan tilaukset |
+| GET | `/api/orders` | Listaa 50 uusinta tilausta |
+| GET | `/api/orders?customerId=1` | Listaa asiakkaan 50 uusinta tilausta |
 | GET | `/api/orders/{id}` | Hakee tilauksen riveineen |
 | POST | `/api/orders` | Luo uuden tilauksen ja sen tilausrivit |
 

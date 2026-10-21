@@ -52,6 +52,8 @@ public class OrderService {
     }
 
     public List<Order> findAll(Long customerId) {
-        return customerId == null ? orders.findAll() : orders.findByCustomerIdOrderByOrderDateDesc(customerId);
+        return customerId == null
+                ? orders.findTop50ByOrderByOrderDateDesc()
+                : orders.findTop50ByCustomerIdOrderByOrderDateDesc(customerId);
     }
 }
