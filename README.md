@@ -102,6 +102,20 @@ FLUSH PRIVILEGES;
 
 Sovellus lukee näkymää endpointilla `/api/order-summary`. Endpoint palauttaa enintään 50 uusinta yhteenvetoa.
 
+### Indeksit
+
+Tietokantaan luotiin seuraavat hakuja nopeuttavat indeksit:
+
+| Indeksin nimi | Taulu | Sarake |
+|---|---|---|
+| `idx_email` | `customers` | `email` |
+| `idx_customerid` | `orders` | `customer_id` |
+| `idx_shippingid` | `orders` | `shipping_address_id` |
+| `idx_catid` | `products` | `category_id` |
+| `idx_prodname` | `products` | `name` |
+
+Indeksit tukevat esimerkiksi asiakkaan sähköpostihakua, asiakkaan tilausten hakua, toimitusosoitteen perusteella tehtäviä hakuja sekä tuotteiden nimi- ja kategoriatietojen hakua. Osalla sarakkeista oli tietokannassa jo foreign key -rajoitteisiin liittyvä indeksi, minkä vuoksi indeksin luontikomento saattoi antaa varoituksen.
+
 
 
 ## Projektin rakenne
